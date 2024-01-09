@@ -3,9 +3,112 @@
 <body>
 
 <main role="main">
-    <div class="container">
-        <div class="mt-5 text-center display-3 text-info">
-            Hello
+    <div class="container-fluid bg-light">
+        <div class="container p-5">
+
+            <section class="mt-4">
+                <h3 class="text-center p-5"><i>BestSellers</i></h3>
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow">
+                            <img class="card-img-top" alt=""
+                                 th:src="${books.get(0).imgUrl}"
+                            >
+                            <div class="card-body text-center">
+                                <h5 class="card-title" th:text="${books.get(0).title}"></h5>
+                                <p class="card-text lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, fugiat.
+                                </p>
+                                <button class="btn btn-lg btn-outline-primary px-3 rounded">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card shadow">
+                            <img class="card-img-top" alt=""
+                                 th:src="${books.get(3).imgUrl}"
+                            >
+                            <div class="card-body text-center">
+                                <h5 class="card-title" th:text="${books.get(3).title}"></h5>
+                                <p class="card-text lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, fugiat.
+                                </p>
+                                <button class="btn btn-lg btn-outline-primary px-3 rounded">Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container text-center mt-4 p-5">
+                    <h3 class="my-4">WHAT OUR READERS ARE SAYING</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                            <blockquote class="blockquote">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur
+                                    cupiditate
+                                    dicta eos quos voluptas!
+                                </p>
+                                <footer class="blockquote-footer">James Serlay</footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                            <blockquote class="blockquote">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur
+                                    cupiditate
+                                    dicta eos quos voluptas!
+                                </p>
+                                <footer class="blockquote-footer">James Serlay</footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-md-4">
+                            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                            <blockquote class="blockquote">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aspernatur
+                                    cupiditate
+                                    dicta eos quos voluptas!
+                                </p>
+                                <footer class="blockquote-footer">James Serlay</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container mt-4 text-center">
+                    <h1>WHAT OTHERS ARE SAYING?</h1>
+                    <div class="row">
+                        <div class="col-md-4" th:each="book : ${books}">
+                            <div class="card mb-3">
+                                <img class="img-thumbnail" alt=""
+                                     th:src="${book.imgUrl}"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container text-center mt-4">
+                    <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                    <blockquote class="blockquote">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium architecto cupiditate
+                            libero magnam, mollitia nam porro quis quisquam reiciendis rem similique sunt totam vitae?
+                            Fugiat.
+                        </p>
+                        <footer class="blockquote-footer">Richard Chan</footer>
+                    </blockquote>
+                </div>
+            </section>
         </div>
     </div>
 </main>
