@@ -2,11 +2,13 @@ package com.example.booksshop.controller;
 
 import com.example.booksshop.entity.BookId;
 import com.example.booksshop.service.BookService;
+import com.example.booksshop.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,6 +20,7 @@ import java.util.Objects;
 @RequestMapping("/book")
 public class BookController {
     private final BookService bookService;
+    private final CartService cartService;
 
     @GetMapping("/list-books")
     public String listBooks(Model model) {
@@ -42,5 +45,10 @@ public class BookController {
         model.addAttribute("book", bookService.findBookById(bookId));
 
         return "bookdetails";
+    }
+
+    @ModelAttribute("cartSize")
+    public Integer cartSize() {
+        return cartService.cartSize();
     }
 }
