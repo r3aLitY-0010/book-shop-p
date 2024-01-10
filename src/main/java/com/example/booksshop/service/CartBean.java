@@ -21,4 +21,8 @@ public class CartBean {
     public Integer cartSize() {
         return cartItems.size();
     }
+
+    public Set<CartItem> getCartItems() {
+        return this.cartItems;
+    }
 }
