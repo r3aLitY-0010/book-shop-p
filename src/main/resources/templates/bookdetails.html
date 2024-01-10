@@ -3,8 +3,33 @@
 <body>
 
 <main role="main">
-    <div class="container">
-        <h1 class="text-center">Details</h1>
+    <div class="container-fluid bg-light">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-md-6 p-5">
+                    <div class="card shadow rounded">
+                        <img class="img-fluid" alt="book-img"
+                             th:src="${book.imgUrl}"
+                        >
+                    </div>
+                </div>
+                <div class="col-md-6 p-5">
+                    <h4 class="lead text-muted"
+                        th:text="${book.title}"
+                    ></h4>
+                    <p class="lead text-muted"
+                       th:text="${'-by ' + book.author.authorName}"
+                    ></p>
+                    <p class="lead">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, commodi distinctio dolore
+                        pariatur possimus quae sint soluta voluptatem. Dolorum in, iure? Aperiam error illum itaque
+                        laboriosam minus nostrum omnis voluptatem.
+                    </p>
+                    <p class="lead">Price : <span th:text="${'$' + book.price}"></span></p>
+                    <p class="lead">Publisher : <span th:text="${book.publisher.publisherName}"></span></p>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 
