@@ -5,6 +5,8 @@ import com.example.booksshop.entity.Book;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -16,13 +18,18 @@ public class CartService {
         cartBean.addCartItem(toCartItem(book));
     }
 
+
     private CartItem toCartItem(Book book) {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+
         return new CartItem(
                 book.getId(),
                 book.getIsbn(),
                 book.getTitle(),
                 book.getPrice(),
-                1
+                1,
+                list
         );
     }
 
@@ -32,5 +39,13 @@ public class CartService {
 
     public Set<CartItem> getCartItems() {
         return cartBean.getCartItems();
+    }
+
+    public void deleteCartItem(int id, String isbn) {
+        cartBean.deleteCartItem(id, isbn);
+    }
+
+    public void clearCart() {
+        cartBean.clearCart();
     }
 }
