@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html th:replace="layout/masterLayout :: layout(~{::main})" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<main role="main">
+    <div class="container-fluid bg-light pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header text-center py-3">
+                            <h4>Register Page</h4>
+                        </div>
+                        <div class="card-body">
+                            <form method="post"
+                                  th:object="${customer}"
+                                  th:action="@{/auth/save-customer}"
+                            >
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="customerName">Customer Name</label>
+                                            <input class="form-control" type="text" id="customerName"
+                                                   name="customerName"
+                                                   th:field="*{customerName}"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="email">Email</label>
+                                            <input class="form-control" type="email" id="email"
+                                                   name="email"
+                                                   th:field="*{email}"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="phoneNumber">Phone Number</label>
+                                            <input class="form-control" type="text" id="phoneNumber"
+                                                   name="phoneNumber"
+                                                   th:field="*{phoneNumber}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="password">Password</label>
+                                            <input class="form-control" type="password" id="password"
+                                                   name="password"
+                                                   th:field="*{password}"
+                                            >
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="address">Address</label>
+                                            <input class="form-control" type="text" id="address"
+                                                   name="address"
+                                                   th:field="*{address}"
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="billingAddress">BillingAddress</label>
+                                    <input class="form-control" type="text" id="billingAddress"
+                                           name="billingAddress"
+                                    >
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="shippingAddress">ShippingAddress</label>
+                                    <input class="form-control" type="text" id="shippingAddress"
+                                           name="shippingAddress"
+                                    >
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Payment Method</label>
+                                    <select class="form-select" name="payment">
+                                        <option
+                                                th:each="s : ${T(com.example.booksshop.entity.PaymentMethod).values()}"
+                                                th:value="${s}"
+                                                th:text="${s}"
+                                        ></option>
+                                    </select>
+                                </div>
+
+                                <button class="btn btn-primary mb-3" type="submit">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

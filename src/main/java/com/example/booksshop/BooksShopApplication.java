@@ -1,13 +1,10 @@
 package com.example.booksshop;
 
 import com.example.booksshop.dao.AuthorDao;
-import com.example.booksshop.dao.BookDao;
 import com.example.booksshop.dao.GenreDao;
 import com.example.booksshop.dao.PublisherDao;
-import com.example.booksshop.entity.Author;
-import com.example.booksshop.entity.Book;
-import com.example.booksshop.entity.Genre;
-import com.example.booksshop.entity.Publisher;
+import com.example.booksshop.dao.RoleDao;
+import com.example.booksshop.entity.*;
 import com.example.booksshop.util.IsbnGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationRunner;
@@ -21,9 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class BooksShopApplication {
     private final AuthorDao authorDao;
-    private final BookDao bookDao;
     private final GenreDao genreDao;
     private final PublisherDao publisherDao;
+    private final RoleDao roleDao;
 
     @Bean
     @Transactional
@@ -87,6 +84,22 @@ public class BooksShopApplication {
 
             authorDao.save(author1);
             authorDao.save(author2);
+        };
+    }
+
+    @Bean
+    @Transactional
+    @Profile("data")
+    public ApplicationRunner runner2() {
+        return r -> {
+            Role admin = new Role();
+            admin.setRoleName("ROLE_ADMIN");
+
+            Role user = new Role();
+            user.setRoleName("ROLE_USER");
+
+            roleDao.save(admin);
+            roleDao.save(user);
         };
     }
 
