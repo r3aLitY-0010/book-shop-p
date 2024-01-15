@@ -5,6 +5,7 @@ import com.example.booksshop.entity.Order;
 import com.example.booksshop.entity.PaymentMethod;
 import com.example.booksshop.service.AuthService;
 import com.example.booksshop.service.CartService;
+import com.example.booksshop.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ import java.time.LocalDate;
 public class AuthController {
     private final AuthService authService;
     private final CartService cartService;
+    private final CustomerService customerService;
 
     @RequestMapping("/register")
     public String register(Model model) {
@@ -70,15 +74,28 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        if (Objects.isNull(customer)) {
+            return "login";
+        } else {
+            customerService.saveCustomerOrderItems(customer);
+//            System.out.println(customer);
+            return "login";
+        }
     }
 
     @ModelAttribute("totalPrice")
     public double totalAmount() {
-        return cartService.getCartItems()
+        Optional<Double> optionalDouble = cartService.getCartItems()
                 .stream()
                 .map(c -> c.getQuantity() * c.getPrice())
-                .reduce((a, b) -> a + b)
-                .get();
+                .reduce((a, b) -> a + b);
+
+        return optionalDouble.orElse(0.0);
+    }
+
+    @GetMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login";
     }
 }

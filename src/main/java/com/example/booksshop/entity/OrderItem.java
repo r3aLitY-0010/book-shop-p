@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -14,12 +17,17 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    private Book book;
+    @OneToMany(mappedBy = "orderItem")
+    private List<Book> books = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "order_id_fk")
     private Order order;
 
     private int quantity;
+
+    public void addBook(Book book) {
+        book.setOrderItem(this);
+        this.books.add(book);
+    }
 }

@@ -29,8 +29,8 @@ public class Book {
     @ManyToMany
     private List<Genre> genres = new ArrayList<>();
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    @ManyToOne
+    private OrderItem orderItem;
 
     private String title;
     private String description;
@@ -51,10 +51,5 @@ public class Book {
     public void addGenres(Genre genre) {
         genre.getBooks().add(this);
         genres.add(genre);
-    }
-
-    public void addOrderItem(OrderItem orderItem) {
-        orderItem.setBook(this);
-        orderItems.add(orderItem);
     }
 }
