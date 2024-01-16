@@ -17,7 +17,7 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "orderItem")
+    @ManyToMany
     private List<Book> books = new ArrayList<>();
 
     @ManyToOne
@@ -27,7 +27,14 @@ public class OrderItem {
     private int quantity;
 
     public void addBook(Book book) {
-        book.setOrderItem(this);
+        book.getOrderItems().add(this);
         this.books.add(book);
+    }
+
+    public void addBooks(List<Book> books){
+        for (Book book:books){
+            book.getOrderItems().add(this);
+        }
+        this.books=books;
     }
 }

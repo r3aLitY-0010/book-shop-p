@@ -24,7 +24,7 @@ public class BooksShopApplication {
 
     @Bean
     @Transactional
-    @Profile("data")
+    //@Profile("data")
     public ApplicationRunner runner() {
         return r -> {
             Author author1 = new Author("Charles Dickens", "cgarles@gmail.com");
@@ -89,7 +89,7 @@ public class BooksShopApplication {
 
     @Bean
     @Transactional
-    @Profile("data")
+    //@Profile("data")
     public ApplicationRunner runner2() {
         return r -> {
             Role admin = new Role();

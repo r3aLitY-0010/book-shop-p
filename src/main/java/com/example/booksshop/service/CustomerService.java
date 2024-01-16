@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
@@ -17,6 +20,7 @@ public class CustomerService {
     private final BookDao bookDao;
     private final CartService cartService;
     private final OrderItemDao orderItemDao;
+
 
     @Transactional
     public void saveCustomerOrderItems(Customer customer) {
@@ -36,13 +40,19 @@ public class CustomerService {
                 .sum();
 
         orderItem.setQuantity(quantity);
+        OrderItem orderItem1 = orderItemDao.save(orderItem);
+//        cartService.getCartItems()
+//                .stream()
+//                .map(c -> toBook(c))
+//                .forEach(b -> orderItem.addBook(b));
 
-        cartService.getCartItems()
+        List<Book> books = cartService
+                .getCartItems()
                 .stream()
-                .map(c -> toBook(c))
-                .forEach(b -> orderItem.addBook(b));
+                .map(this::toBook).collect(Collectors.toList());
 
-        orderItemDao.save(orderItem);
+        var booklist = bookDao.saveAllAndFlush(books);
+        orderItem1.addBooks(booklist);
     }
 
     private Book toBook(CartItem cartItem) {

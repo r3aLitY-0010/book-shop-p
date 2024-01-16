@@ -1,6 +1,7 @@
 package com.example.booksshop.service;
 
 import com.example.booksshop.dao.BookDao;
+import com.example.booksshop.dto.OrderItemInfo;
 import com.example.booksshop.entity.Book;
 import com.example.booksshop.entity.BookId;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,5 +21,9 @@ public class BookService {
 
     public Book findBookById(BookId bookId) {
         return bookDao.findById(bookId).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public OrderItemInfo fetchOrderItemInfo(String userName) {
+        return bookDao.fetchOrderItemInfo(userName);
     }
 }

@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,8 +31,9 @@ public class Book {
     @ManyToMany
     private List<Genre> genres = new ArrayList<>();
 
-    @ManyToOne
-    private OrderItem orderItem;
+    @ManyToMany
+    private List<OrderItem> orderItems =
+            new ArrayList<>();
 
     private String title;
     private String description;

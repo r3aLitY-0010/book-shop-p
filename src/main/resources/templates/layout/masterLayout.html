@@ -52,10 +52,10 @@
         </div>
 
         <div sec:authorize="isAuthenticated()">
-            <a class="me-2" href="#">
+            <a class="nav-link me-2" th:href="@{/book/own-library}" >
                 Own Library
             </a>
-            <a href="javascript: document.logoutForm.submit()">Logout</a>
+            <a href="javascript: document.logoutForm.submit()" class="nav-link">Logout</a>
             <form name="logoutForm" method="post"
                   th:action="@{/logout}"
                   th:hidden="true"

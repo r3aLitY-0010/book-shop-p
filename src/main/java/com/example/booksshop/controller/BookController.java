@@ -1,5 +1,6 @@
 package com.example.booksshop.controller;
 
+import com.example.booksshop.dto.OrderItemInfo;
 import com.example.booksshop.entity.BookId;
 import com.example.booksshop.service.BookService;
 import com.example.booksshop.service.CartService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.security.Principal;
 import java.util.Objects;
 
 @Controller
@@ -21,6 +23,15 @@ import java.util.Objects;
 public class BookController {
     private final BookService bookService;
     private final CartService cartService;
+
+    @GetMapping("/own-library")
+    public String listOwnLibrary(Model model, Principal principal){
+        String userName = principal.getName();
+        OrderItemInfo orderItemInfo = bookService.fetchOrderItemInfo(userName);
+        model.addAttribute("orderItemInfo", orderItemInfo);
+        model.addAttribute("userName", userName);
+        return "owner_library";
+    }
 
     @GetMapping("/list-books")
     public String listBooks(Model model) {
